@@ -1,0 +1,42 @@
+{
+  "titulo": "Isenção do IR em vigor: quanto sobra no bolso de quem ganha até R$ 5 mil",
+  "linha_fina": "O primeiro ano da nova faixa de isenção e do imposto mínimo sobre altas rendas.",
+  "categoria": "Economia & Trabalho",
+  "selo": "Análise",
+  "autora": "Sthephanye Silva",
+  "data": "2026-10-25T10:00:00-03:00",
+  "destaque_capa": false,
+  "imagem": "",
+  "posicao_foto": "center",
+  "legenda_foto": "",
+  "credito_foto": "",
+  "video": "",
+  "em_30_segundos": [
+    "Quem ganha até R$ 5 mil por mês não paga Imposto de Renda desde 2026.",
+    "Entre R$ 5 mil e R$ 7.350 o imposto foi reduzido.",
+    "Rendas acima de R$ 600 mil por ano pagam um imposto mínimo de até 10%."
+  ],
+  "fatos": "- A **Lei 15.270/2025** foi sancionada em **26/11/2025** e vale desde 2026.\n- Na Câmara, o projeto foi aprovado por **493 a 0**, em 01/10/2025.\n- Imposto mínimo: começa acima de **R$ 600 mil por ano** e chega a **10%** a partir de **R$ 1,2 milhão por ano**.",
+  "analise": "[Análise: quem ganhou, quem passou a pagar mais e o efeito na arrecadação.]",
+  "opiniao": "",
+  "o_que_muda": "[Exemplos práticos: quanto sobra por mês para quem ganha R$ 3 mil, R$ 5 mil e R$ 7 mil.]",
+  "corpo": "[Texto completo da análise.]",
+  "galeria": [],
+  "linha_do_tempo": [],
+  "fontes": [
+    {
+      "nome": "Lei 15.270/2025 — resumo das regras",
+      "url": "https://www.reformatributaria.com/governo/lula-sanciona-isencao-do-ir-ate-r-5-000-mes-e-cria-imposto-minimo-a-rendas-acima-de-r-600-ano-entenda-regras/"
+    },
+    {
+      "nome": "Gazeta do Povo — Como votou cada deputado",
+      "url": "https://www.gazetadopovo.com.br/economia/como-votou-cada-deputado-na-isencao-do-ir/"
+    }
+  ],
+  "tags": [
+    "Imposto de Renda",
+    "Tributação"
+  ],
+  "checado_em": "2026-10-26T00:00:00-03:00",
+  "correcao": ""
+}

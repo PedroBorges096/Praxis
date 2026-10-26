@@ -1,0 +1,85 @@
+/* =========================================================
+   NOTÍCIA: página completa e caixa de leitura rápida
+   ========================================================= */
+.nt { display: flex; flex-direction: column; }
+.nt-corpo { display: flex; flex-direction: column; gap: 22px; padding: 28px 0; }
+.nt-corpo--estreito { max-width: 760px; margin: 0 auto; width: 100%; }
+.nt-rotulo { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--bordo); }
+.nt-titulo { margin: 0; font-family: var(--serif); font-weight: 800; font-size: clamp(30px, 4.6vw, 52px); line-height: 1.08; }
+.nt--modal .nt-titulo { font-size: clamp(26px, 3.6vw, 38px); }
+.nt-linha-fina { margin: 0; font-size: 20px; line-height: 1.5; color: var(--texto-forte); }
+.nt-meta { font-size: 14px; color: var(--texto-suave); }
+.nt-meta strong { color: var(--texto); }
+.nt-checado { color: #2F7D5B; font-weight: 600; white-space: nowrap; }
+.nt-ferramentas { display: flex; flex-wrap: wrap; gap: 8px; }
+.nt-ferramentas .btn { min-height: 40px; font-size: 13px; }
+.nt-ferramentas .btn[aria-pressed="true"] { background: var(--bordo); border-color: var(--bordo); color: #fff; }
+
+.nt-midia { max-width: 1100px; margin: 0 auto; width: 100%; }
+.nt-foto { margin: 0; }
+.nt-foto img { width: 100%; aspect-ratio: 2 / 1; object-fit: cover; background: #DCD6CB; }
+.nt-foto figcaption, .nt-galeria figcaption { font-size: 13px; color: var(--texto-suave); padding-top: 8px; }
+.nt-video { position: relative; aspect-ratio: 16 / 9; background: #000; }
+.nt-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.nt-30s { background: var(--areia); border-left: 0; padding: 20px 24px; border-radius: 4px; }
+.nt-30s h2 { margin: 0 0 10px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--bordo); }
+.nt-30s ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 17px; line-height: 1.5; font-weight: 500; }
+
+.nt-bloco { border: 1px solid var(--linha); background: var(--branco); padding: 20px 24px; border-radius: 4px; }
+.nt-bloco h2 { margin: 0 0 8px; font-family: var(--serif); font-size: 22px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+.nt-bloco h2 small { font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--texto-suave); letter-spacing: .04em; }
+.nt-bloco--fatos { border-top: 4px solid var(--azul); }
+.nt-bloco--analise { border-top: 4px solid var(--grafite); }
+.nt-bloco--opiniao { border-top: 4px solid var(--bordo); }
+.nt-bloco--muda { border-top: 4px solid #D9A21B; background: #FBF5E6; }
+[data-tema="escuro"] .nt-bloco--muda { background: #2A2416; }
+
+.nt-texto { font-size: 18px; line-height: 1.7; }
+.nt-texto p { margin: 0 0 1em; }
+.nt-texto p:last-child { margin-bottom: 0; }
+.nt-texto a { color: var(--bordo); text-decoration: underline; }
+.nt-texto ul, .nt-texto ol { padding-left: 22px; margin: 0 0 1em; }
+.nt-texto li { margin-bottom: 6px; }
+.nt-texto h2, .nt-texto h3 { font-family: var(--serif); margin: 1.4em 0 .5em; }
+.nt-texto blockquote { margin: 1.2em 0; padding: 4px 0 4px 18px; border-left: 4px solid var(--bordo); font-family: var(--serif); font-style: italic; font-size: 1.15em; }
+.nt-texto img { margin: 1em 0; }
+.nt-texto--corpo { padding-top: 6px; }
+
+.nt-tempo h2, .nt-galeria h2, .nt-fontes h2 { font-family: var(--serif); font-size: 22px; margin: 0 0 12px; }
+.nt-tempo ol { list-style: none; margin: 0; padding: 0 0 0 18px; border-left: 3px solid var(--linha); display: flex; flex-direction: column; gap: 14px; }
+.nt-tempo li { position: relative; display: flex; flex-direction: column; gap: 2px; }
+.nt-tempo li::before { content: ""; position: absolute; left: -26px; top: 4px; width: 13px; height: 13px; border-radius: 50%; background: var(--bordo); border: 3px solid var(--fundo); }
+.nt-tempo b { font-size: 13px; color: var(--bordo); }
+
+.nt-galeria__grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.nt-galeria figure { margin: 0; }
+.nt-galeria__abrir { padding: 0; border: 0; background: none; cursor: zoom-in; width: 100%; display: block; }
+.nt-galeria img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+
+.nt-fontes ul { margin: 0; padding-left: 20px; font-size: 15px; display: flex; flex-direction: column; gap: 6px; }
+.nt-fontes a { color: var(--bordo); text-decoration: underline; }
+.nt-correcao { background: #FBE4E6; color: #6E1A28; padding: 14px 18px; border-radius: 4px; font-size: 14px; }
+.nt-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.nt-tags a { font-size: 13px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--linha); border-radius: 16px; }
+.nt-acoes { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 6px; }
+
+.nt-relacionadas { margin-top: 24px; border-top: 2px solid var(--texto); padding-top: 16px; }
+.nt-rel { display: flex; flex-direction: column; gap: 8px; padding: 18px; background: var(--branco); border: 1px solid var(--linha); }
+.nt-rel strong { font-family: var(--serif); font-size: 19px; line-height: 1.3; }
+.nt-rel small { color: var(--texto-suave); }
+.nt-rel .selo { align-self: flex-start; }
+
+/* Caixa de leitura rápida */
+dialog.leitura { border: 0; padding: 0; width: min(880px, calc(100vw - 16px)); max-height: calc(100vh - 16px); background: var(--fundo); color: var(--texto); box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+dialog.leitura::backdrop { background: rgba(20, 27, 38, .7); }
+.leitura__fechar { position: sticky; top: 10px; float: right; margin: 10px 10px -54px 0; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(20,27,38,.85); color: #fff; font-size: 22px; cursor: pointer; z-index: 3; }
+.nt--modal .nt-corpo { padding: 24px clamp(18px, 4vw, 40px) 32px; }
+.nt--modal .nt-foto img { aspect-ratio: 2 / 1; }
+
+/* Lightbox da galeria */
+dialog.lightbox { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+dialog.lightbox::backdrop { background: rgba(0,0,0,.88); }
+dialog.lightbox img { max-width: 96vw; max-height: 86vh; object-fit: contain; }
+dialog.lightbox p { color: #fff; text-align: center; font-size: 14px; }
+.lightbox__fechar { position: fixed; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; font-size: 22px; cursor: pointer; }

@@ -1,0 +1,27 @@
+{
+  "titulo": "Estreia: o que é a PRAXIS",
+  "numero": 1,
+  "data": "2026-10-20T08:00:00-03:00",
+  "descricao": "[Descrição do episódio de estreia: apresentação da Sthephanye e da proposta do podcast.]",
+  "capa": "",
+  "spotify": "",
+  "youtube": "",
+  "audio_arquivo": "",
+  "duracao": "[duração]",
+  "convidados": [],
+  "capitulos": [
+    {
+      "tempo": "00:00",
+      "titulo": "Abertura"
+    },
+    {
+      "tempo": "05:00",
+      "titulo": "[Tema 1]"
+    },
+    {
+      "tempo": "20:00",
+      "titulo": "[Tema 2]"
+    }
+  ],
+  "transcricao": ""
+}

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quem Governa o Brasil — PRAXIS</title>
+<meta name="description" content="Todos os deputados federais, senadores e o Executivo: foto, partido, idade, salário, gastos e projetos. Dados oficiais atualizados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8B1E2D">
+<link rel="icon" href="img/icone.svg">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .hero { padding-top: 40px; padding-bottom: 8px; display: flex; flex-direction: column; gap: 12px; max-width: 900px; }
+  .hero h1 { margin: 0; font-family: var(--serif); font-size: clamp(34px, 5vw, 56px); line-height: 1.05; font-weight: 800; }
+  .hero p { margin: 0; font-size: 18px; color: var(--texto-forte); }
+  .resumo { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 28px 0; }
+  .resumo .cartao { padding: 18px; display: flex; flex-direction: column; gap: 4px; }
+  .resumo .n { font-family: var(--serif); font-size: 38px; font-weight: 800; line-height: 1; }
+  .resumo .l { font-size: 13px; color: var(--texto-suave); }
+  .resumo .destaque { background: var(--bordo); color: #fff; border-color: var(--bordo); }
+  .resumo .destaque .l { color: var(--bordo-claro); }
+
+  .abas { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .mapa-bloco { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; background: var(--branco); border: 1px solid var(--linha); border-radius: 16px; padding: 20px; margin: 18px 0; }
+  .mapa-bloco > div:first-child { flex: 1 1 240px; }
+  .mapa { display: grid; grid-template-columns: repeat(8, 46px); grid-template-rows: repeat(9, 46px); gap: 5px; flex: 0 0 auto; }
+  @media (max-width: 480px) { .mapa { grid-template-columns: repeat(8, 36px); grid-template-rows: repeat(9, 36px); gap: 4px; } .mapa__uf small { display: none; } }
+  .mapa__uf { border: 0; border-radius: 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.05; font-size: 12px; color: var(--texto);
+    background: color-mix(in srgb, var(--bordo) calc(var(--int) * 100%), var(--areia)); transition: transform .12s; }
+  .mapa__uf:hover { transform: scale(1.08); }
+  .mapa__uf b { font-size: 12px; }
+  .mapa__uf small { font-size: 10px; opacity: .85; }
+  .mapa__uf[style*="--int:0.5"], .mapa__uf[style*="--int:0.6"], .mapa__uf[style*="--int:0.7"], .mapa__uf[style*="--int:0.8"], .mapa__uf[style*="--int:0.9"], .mapa__uf[style*="--int:1.0"] { color: #fff; }
+  .mapa__uf--sel { outline: 3px solid var(--grafite); outline-offset: 2px; }
+  .mapa__uf--fora { opacity: .3; }
+  .aba { min-height: 44px; padding: 0 18px; border-radius: 22px; border: 1px solid #C9C3B8; background: var(--branco); font-weight: 600; cursor: pointer; color: var(--texto); }
+  .aba[aria-pressed="true"] { background: var(--grafite); color: #fff; border-color: var(--grafite); }
+  .aba small { font-weight: 500; opacity: .75; margin-left: 4px; }
+
+  .filtros { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; align-items: end; background: var(--branco); border: 1px solid var(--linha); padding: 16px; }
+  .filtros .busca { grid-column: span 2; }
+  @media (max-width: 520px) { .filtros .busca { grid-column: auto; } }
+  .regioes { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 6px; }
+  .regiao { min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid #C9C3B8; background: transparent; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--texto); }
+  .regiao[aria-pressed="true"] { background: var(--bordo); color: #fff; border-color: var(--bordo); }
+
+  .barra-partidos { margin: 18px 0 8px; }
+  .barra-partidos__trilho { display: flex; height: 16px; border-radius: 8px; overflow: hidden; background: var(--linha); }
+  .barra-partidos__legenda { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: 13px; }
+  .barra-partidos__legenda button { border: 0; background: none; padding: 4px 0; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; color: var(--texto); }
+  .barra-partidos__legenda i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+  .contagem { font-size: 14px; color: var(--texto-suave); margin: 18px 0 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  .lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+  .pessoa { background: var(--branco); border: 1px solid var(--linha); padding: 0; text-align: left; cursor: pointer; display: flex; flex-direction: column; color: var(--texto); transition: transform .15s, box-shadow .15s; }
+  .pessoa:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(27,37,51,.10); }
+  .pessoa__foto { aspect-ratio: 3/4; background: #DCD6CB; object-fit: cover; width: 100%; }
+  .pessoa__ini { aspect-ratio: 3/4; background: #2A3444; color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 42px; font-weight: 700; }
+  .pessoa__info { padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+  .pessoa__nome { font-weight: 700; font-size: 15px; line-height: 1.25; }
+  .pessoa__meta { font-size: 13px; color: var(--texto-suave); }
+  .pessoa__cargo { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--bordo); }
+  .mais { display: flex; justify-content: center; margin-top: 24px; }
+
+  dialog.ficha { border: 0; padding: 0; width: min(920px, calc(100vw - 24px)); max-height: calc(100vh - 24px); background: var(--fundo); color: var(--texto); box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+  dialog.ficha::backdrop { background: rgba(20,27,38,.65); }
+  .ficha__fechar { position: sticky; top: 0; float: right; margin: 10px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--grafite); color: #fff; font-size: 20px; cursor: pointer; z-index: 2; }
+  .ficha__topo { display: flex; flex-wrap: wrap; gap: 24px; padding: 24px; background: var(--branco); border-bottom: 1px solid var(--linha); }
+  .ficha__foto { width: 180px; flex: 0 0 auto; aspect-ratio: 3/4; object-fit: cover; background: #DCD6CB; }
+  .ficha__dados { flex: 1 1 300px; display: flex; flex-direction: column; gap: 10px; }
+  .ficha__dados h2 { margin: 0; font-family: var(--serif); font-size: 32px; line-height: 1.1; }
+  .ficha__tabela { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .ficha__tabela div { background: var(--fundo); padding: 10px 12px; }
+  .ficha__tabela dt { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--texto-suave); }
+  .ficha__tabela dd { margin: 2px 0 0; font-weight: 700; font-size: 16px; }
+  .ficha__corpo { padding: 24px; display: flex; flex-direction: column; gap: 24px; }
+  .ficha__corpo h3 { margin: 0 0 10px; font-family: var(--serif); font-size: 22px; }
+  .proj { display: flex; flex-direction: column; gap: 0; }
+  .proj li { list-style: none; padding: 12px 0; border-bottom: 1px solid var(--linha); display: flex; gap: 12px; align-items: flex-start; }
+  .proj ul { padding: 0; margin: 0; }
+  .proj__sigla { flex: 0 0 auto; font-weight: 700; font-size: 13px; background: var(--grafite); color: #fff; padding: 3px 8px; border-radius: 8px; }
+  .proj__texto { font-size: 14px; line-height: 1.5; }
+  .proj__status { display: block; font-size: 12px; color: var(--texto-suave); margin-top: 3px; }
+  .proj__lei { color: #fff; background: var(--azul); font-weight: 700; font-size: 11px; padding: 2px 6px; border-radius: 8px; margin-left: 6px; }
+  .links-oficiais { display: flex; flex-wrap: wrap; gap: 10px; }
+</style>
+</head>
+<body data-pagina="politicos">
+<div id="topo"></div>
+
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">Transparência · Dados oficiais</div>
+    <h1>Quem governa o Brasil</h1>
+    <p>Todos os deputados federais, senadores e o Executivo. Clique em qualquer nome para ver foto, idade, partido, salário, gastos e projetos.</p>
+  </section>
+
+  <div class="resumo" id="resumo">
+    <div class="cartao"><span class="n" id="n-dep">…</span><span class="l">deputados federais</span></div>
+    <div class="cartao"><span class="n" id="n-sen">…</span><span class="l">senadores</span></div>
+    <div class="cartao"><span class="n">27</span><span class="l">governadores</span></div>
+    <div class="cartao"><span class="n" id="n-part">—</span><span class="l">partidos no Congresso</span></div>
+    <div class="cartao destaque"><span class="n" style="font-size:28px" id="salario-topo">R$ 46.366,19</span><span class="l">salário bruto mensal de deputados, senadores e presidente (2026)</span></div>
+  </div>
+
+  <div class="abas" role="group" aria-label="Cargo">
+    <button class="aba" type="button" data-cargo="todos" aria-pressed="true">Todos <small id="c-todos"></small></button>
+    <button class="aba" type="button" data-cargo="executivo" aria-pressed="false">Presidência <small id="c-executivo"></small></button>
+    <button class="aba" type="button" data-cargo="ministro" aria-pressed="false">Ministros <small id="c-ministro"></small></button>
+    <button class="aba" type="button" data-cargo="mesa" aria-pressed="false">Presidentes das Casas <small id="c-mesa"></small></button>
+    <button class="aba" type="button" data-cargo="senador" aria-pressed="false">Senadores <small id="c-senador"></small></button>
+    <button class="aba" type="button" data-cargo="deputado" aria-pressed="false">Deputados <small id="c-deputado"></small></button>
+    <button class="aba" type="button" data-cargo="governador" aria-pressed="false">Governadores <small id="c-governador"></small></button>
+    <button class="aba" type="button" data-cargo="stf" aria-pressed="false">STF <small id="c-stf"></small></button>
+  </div>
+
+  <form class="filtros" id="filtros" onsubmit="return false">
+    <div class="campo busca">
+      <label for="f-busca">Buscar por nome</label>
+      <input id="f-busca" type="search" placeholder="Ex.: Silva" autocomplete="off">
+    </div>
+    <div class="campo">
+      <label for="f-uf">Estado</label>
+      <select id="f-uf"><option value="">Todos</option></select>
+    </div>
+    <div class="campo">
+      <label for="f-partido">Partido</label>
+      <select id="f-partido"><option value="">Todos</option></select>
+    </div>
+    <div class="campo">
+      <label for="f-ordem">Ordenar por</label>
+      <select id="f-ordem">
+        <option value="nome">Nome (A–Z)</option>
+        <option value="partido">Partido</option>
+        <option value="uf">Estado</option>
+      </select>
+    </div>
+  </form>
+
+  <div class="regioes" role="group" aria-label="Região" id="regioes">
+    <button type="button" class="regiao" data-regiao="" aria-pressed="true">Todo o Brasil</button>
+    <button type="button" class="regiao" data-regiao="Norte" aria-pressed="false">Norte</button>
+    <button type="button" class="regiao" data-regiao="Nordeste" aria-pressed="false">Nordeste</button>
+    <button type="button" class="regiao" data-regiao="Centro-Oeste" aria-pressed="false">Centro-Oeste</button>
+    <button type="button" class="regiao" data-regiao="Sudeste" aria-pressed="false">Sudeste</button>
+    <button type="button" class="regiao" data-regiao="Sul" aria-pressed="false">Sul</button>
+  </div>
+
+  <section class="mapa-bloco" aria-labelledby="mapa-titulo">
+    <div>
+      <h2 id="mapa-titulo" class="serif" style="margin:0 0 6px;font-size:22px">Mapa do Brasil</h2>
+      <p style="margin:0;font-size:14px;color:var(--texto-suave)">Clique num estado para ver todos os representantes dele. Quanto mais escuro, mais pessoas no filtro atual.</p>
+    </div>
+    <div class="mapa" id="mapa" role="group" aria-label="Estados do Brasil"></div>
+  </section>
+
+  <div id="nota-cargo"></div>
+  <div class="barra-partidos" id="barra-partidos" aria-label="Distribuição por partido"></div>
+
+  <div class="contagem"><span id="contagem" aria-live="polite"></span><button type="button" class="btn btn--contorno" id="limpar" style="min-height:36px">Limpar filtros</button></div>
+  <div id="status"></div>
+  <div class="lista" id="lista"></div>
+  <div class="mais"><button type="button" class="btn btn--escuro" id="ver-mais" hidden>Ver mais</button></div>
+
+  <p style="font-size:12px;color:var(--texto-suave);margin-top:32px">Fontes: API de Dados Abertos da Câmara dos Deputados, API de Dados Abertos do Senado Federal e TSE. Salário: subsídio bruto definido pelo Decreto Legislativo 172/2022, vigente desde 1º/02/2025. Os dados são carregados direto das fontes oficiais toda vez que a página abre.</p>
+</main>
+
+<dialog class="ficha" id="ficha" aria-labelledby="ficha-nome">
+  <button class="ficha__fechar" type="button" id="ficha-fechar" aria-label="Fechar">×</button>
+  <div id="ficha-conteudo"></div>
+</dialog>
+
+<div id="rodape"></div>
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/ticker.js"></script>
+<script src="js/politicos.js"></script>
+</body>
+</html>

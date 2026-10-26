@@ -1,0 +1,341 @@
+# =========================================================
+# PAINEL DO FORA DA BOLHA (Decap CMS)
+# Antes de publicar, troque SEU-USUARIO-GITHUB pelo seu usuário.
+# Passo a passo completo no LEIA-ME.md.
+# =========================================================
+backend:
+  name: github
+  repo: PedroBorges096/praxis
+  branch: main
+  commit_messages:
+    create: 'Nova publicação: {{slug}}'
+    update: 'Atualiza: {{slug}}'
+    delete: 'Remove: {{slug}}'
+    uploadMedia: 'Envia arquivo: {{path}}'
+
+locale: pt
+publish_mode: editorial_workflow   # Rascunho → Em revisão → Pronto para publicar
+site_url: https://praxis-analise.netlify.app
+display_url: https://praxis-analise.netlify.app
+logo_url: /img/icone.svg
+
+media_folder: img/uploads
+public_folder: /img/uploads
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+  # ---------------------------------------------------------
+  - name: noticias
+    label: Notícias
+    label_singular: Notícia
+    description: >-
+      Cada notícia vira uma página própria no site e aparece na home.
+      Marque "Destacar na capa" para virar a manchete principal.
+      Para AGENDAR, escolha uma data futura em "Publicar em".
+    folder: content/noticias
+    extension: json
+    format: json
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    summary: '{{data | date("DD/MM/YYYY")}} · {{selo}} · {{titulo}}'
+    sortable_fields: [data, titulo, categoria]
+    view_filters:
+      - { label: Política, field: categoria, pattern: Política Nacional }
+      - { label: Economia, field: categoria, pattern: Economia & Trabalho }
+      - { label: Na capa, field: destaque_capa, pattern: true }
+    fields:
+      - { label: Título, name: titulo, widget: string, hint: 'Direto e claro. Ideal: até 90 caracteres.' }
+      - { label: Linha fina (resumo abaixo do título), name: linha_fina, widget: text, hint: 'Uma ou duas frases. Aparece na capa e no Google.' }
+      - label: Editoria
+        name: categoria
+        widget: select
+        options: ['Política Nacional', 'Economia & Trabalho', 'Geopolítica & Sul Global', 'Mercados & Ações', 'Meio Ambiente & Clima', 'Colunas & Opinião']
+      - label: Tipo de texto (selo)
+        name: selo
+        widget: select
+        default: Reportagem
+        options: [Reportagem, Análise, Opinião, Explicador]
+        hint: 'Reportagem = fatos. Análise = interpretação com dados. Opinião = posição da autora. Explicador = aparece no bloco "Explicando".'
+      - { label: Autora / Autor, name: autora, widget: string, default: 'Sthephanye Silva' }
+      - { label: Publicar em, name: data, widget: datetime, hint: 'Data futura = notícia agendada (entra no ar sozinha na hora marcada).' }
+      - { label: Destacar na capa (manchete), name: destaque_capa, widget: boolean, default: false }
+
+      - label: Foto principal
+        name: imagem
+        widget: image
+        required: false
+        choose_url: false
+        hint: '📐 Tamanho ideal: 1600 × 800 px (formato 2:1, horizontal). Mínimo 1200 px de largura. JPG ou WebP. Pode subir foto do celular: o site redimensiona e comprime sozinho.'
+      - label: Enquadramento da foto
+        name: posicao_foto
+        widget: select
+        default: center
+        options:
+          - { label: 'Centro', value: center }
+          - { label: 'Mostrar mais o topo (rostos)', value: top }
+          - { label: 'Mostrar mais a parte de baixo', value: bottom }
+        hint: 'Use "topo" quando a foto cortar a cabeça das pessoas.'
+      - { label: Legenda da foto, name: legenda_foto, widget: string, required: false }
+      - { label: Crédito da foto, name: credito_foto, widget: string, required: false, hint: 'Ex.: Foto: Agência Brasil. Obrigatório quando a foto não for sua.' }
+      - { label: Vídeo (link do YouTube), name: video, widget: string, required: false, hint: 'Cole o link do vídeo. Se preenchido, aparece no lugar da foto na caixa de leitura.' }
+
+      - label: Em 30 segundos (até 3 tópicos)
+        name: em_30_segundos
+        widget: list
+        required: false
+        max: 3
+        field: { label: Tópico, name: item, widget: string }
+      - { label: '📌 Fatos', name: fatos, widget: markdown, required: false, hint: 'Só o que é verificável: datas, números, quem fez o quê. Sem adjetivos.' }
+      - { label: '🔍 Análise', name: analise, widget: markdown, required: false, hint: 'Interpretação com base em dados e contexto.' }
+      - { label: '💬 Opinião', name: opiniao, widget: markdown, required: false, hint: 'Posição da autora. Fica separada dos fatos.' }
+      - { label: '💡 O que muda para você', name: o_que_muda, widget: markdown, required: false, hint: 'O impacto no bolso e no dia a dia do leitor.' }
+      - { label: Texto completo da matéria, name: corpo, widget: markdown }
+
+      - label: Galeria de fotos
+        name: galeria
+        widget: list
+        required: false
+        hint: '📐 Fotos da galeria: 1200 × 800 px (formato 3:2).'
+        fields:
+          - { label: Foto, name: imagem, widget: image, choose_url: false }
+          - { label: Legenda, name: legenda, widget: string, required: false }
+          - { label: Crédito, name: credito, widget: string, required: false }
+      - label: Linha do tempo
+        name: linha_do_tempo
+        widget: list
+        required: false
+        fields:
+          - { label: Quando, name: quando, widget: string, hint: 'Ex.: 27/05/2026' }
+          - { label: O que aconteceu, name: evento, widget: string }
+      - label: Fontes
+        name: fontes
+        widget: list
+        required: false
+        hint: 'Toda informação importante precisa de fonte. Ex.: IBGE, Agência Câmara, Diário Oficial.'
+        fields:
+          - { label: Nome da fonte, name: nome, widget: string }
+          - { label: Link, name: url, widget: string, required: false }
+      - { label: Tags, name: tags, widget: list, required: false, hint: 'Ex.: 6x1, Reforma Tributária. Separe por vírgula.' }
+      - { label: Checado em, name: checado_em, widget: datetime, required: false, date_format: 'DD/MM/YYYY', time_format: false, hint: 'Data em que os fatos foram conferidos. Mostra o selo ✅ Checado.' }
+      - { label: Correção, name: correcao, widget: text, required: false, hint: 'Se errou, explique aqui o que foi corrigido. Aparece no fim da matéria.' }
+
+  # ---------------------------------------------------------
+  - name: podcast
+    label: Podcast
+    label_singular: Episódio
+    folder: content/podcast
+    extension: json
+    format: json
+    create: true
+    slug: 'ep-{{numero}}-{{slug}}'
+    summary: '#{{numero}} · {{titulo}}'
+    fields:
+      - { label: Título do episódio, name: titulo, widget: string }
+      - { label: Número, name: numero, widget: number, value_type: int }
+      - { label: Data, name: data, widget: datetime }
+      - { label: Descrição, name: descricao, widget: text }
+      - { label: Capa, name: capa, widget: image, required: false, choose_url: false, hint: '📐 3000 × 3000 px (quadrada), padrão do Spotify. Mínimo 1400 × 1400.' }
+      - { label: Link do Spotify, name: spotify, widget: string, required: false, hint: 'Link do episódio no Spotify. Ex.: https://open.spotify.com/episode/...' }
+      - { label: Link do YouTube (vídeo), name: youtube, widget: string, required: false }
+      - { label: Arquivo de áudio (MP3), name: audio_arquivo, widget: file, required: false, hint: 'Opcional. Com o MP3, o site libera velocidade 1,5x/2x e capítulos clicáveis. Até ~50 MB.' }
+      - { label: Duração, name: duracao, widget: string, required: false, hint: 'Ex.: 42 min' }
+      - { label: Convidados, name: convidados, widget: list, required: false }
+      - label: Capítulos
+        name: capitulos
+        widget: list
+        required: false
+        fields:
+          - { label: Tempo, name: tempo, widget: string, hint: 'Ex.: 12:30' }
+          - { label: Assunto, name: titulo, widget: string }
+      - { label: Transcrição, name: transcricao, widget: markdown, required: false, hint: 'Ajuda no Google e em acessibilidade. O YouTube gera uma automática que você pode colar aqui.' }
+
+  # ---------------------------------------------------------
+  - name: colunistas
+    label: Colunistas
+    label_singular: Colunista
+    folder: content/colunistas
+    extension: json
+    format: json
+    create: true
+    slug: '{{slug}}'
+    summary: '{{nome}} — {{titulo_artigo}}'
+    fields:
+      - { label: Nome, name: nome, widget: string }
+      - { label: Foto, name: foto, widget: image, required: false, choose_url: false, hint: '📐 400 × 400 px (quadrada), rosto centralizado.' }
+      - { label: Função, name: funcao, widget: string, hint: 'Ex.: Economista' }
+      - { label: Título do artigo mais recente, name: titulo_artigo, widget: string }
+      - { label: Link do artigo, name: link, widget: string, required: false, hint: 'Cole o endereço da notícia no site (ex.: /noticia/2026-10-26-meu-artigo.html).' }
+      - { label: Ordem na lista, name: ordem, widget: number, default: 1, value_type: int }
+
+  # ---------------------------------------------------------
+  - name: configuracoes
+    label: Configurações do site
+    editor: { preview: false }
+    files:
+      - name: geral
+        label: Nome, redes e apoio
+        file: content/config.json
+        fields:
+          - { label: Nome do jornal, name: nome, widget: string, default: 'PRAXIS' }
+          - { label: Parte do nome em vermelho (opcional), name: nome_destaque, widget: string, required: false, default: '' }
+          - { label: Assinatura abaixo do logo, name: slogan, widget: string }
+          - { label: Dona do jornal, name: dona, widget: string }
+          - { label: Foto da dona, name: foto_dona, widget: image, required: false, choose_url: false, hint: '📐 400 × 400 px (quadrada).' }
+          - { label: Apresentação (seção "Quem faz"), name: bio, widget: text }
+          - label: Redes sociais
+            name: redes
+            widget: object
+            fields:
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: YouTube, name: youtube, widget: string, required: false }
+              - { label: X / Twitter, name: x, widget: string, required: false }
+              - { label: TikTok, name: tiktok, widget: string, required: false }
+              - { label: Spotify (podcast), name: spotify, widget: string, required: false }
+          - { label: Link de apoio (Apoia.se, Catarse…), name: link_apoio, widget: string, required: false }
+          - { label: Chave Pix, name: chave_pix, widget: string, required: false, hint: 'Aparece no card "Apoie" do site, com botão de copiar. Para TIRAR o Pix do site, apague este campo e publique.' }
+          - { label: Texto do card de apoio, name: texto_apoio, widget: text, required: false, default: 'A PRAXIS é independente e feita com o apoio de quem lê. Qualquer valor ajuda a manter o jornalismo de análise no ar.' }
+          - { label: Link do formulário da newsletter, name: newsletter_action, widget: string, required: false, hint: 'O endereço "action" do formulário do Substack, Beehiiv, Brevo ou Mailchimp.' }
+
+  # ---------------------------------------------------------
+  - name: paginas
+    label: Páginas institucionais
+    label_singular: Página
+    description: 'Quem somos, Linha editorial, Política de privacidade e Contato. O endereço da página é o nome do arquivo (ex.: /contato).'
+    folder: content/paginas
+    extension: json
+    format: json
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: Título, name: titulo, widget: string }
+      - { label: Resumo, name: resumo, widget: text, required: false }
+      - { label: Texto, name: corpo, widget: markdown }
+      - { label: Mostrar formulário de contato, name: formulario_contato, widget: boolean, default: false }
+      - { label: Ordem, name: ordem, widget: number, value_type: int, default: 5 }
+
+  # ---------------------------------------------------------
+  - name: quem_governa
+    label: Quem Governa (cargos sem API)
+    editor: { preview: false }
+    description: 'Deputados e senadores se atualizam sozinhos. Aqui você edita Presidência, ministros, STF, governadores e presidentes das Casas. Foto: deixe vazio para buscar na Wikipédia automaticamente.'
+    files:
+      - name: autoridades
+        label: Autoridades
+        file: content/autoridades.json
+        fields:
+          - { label: Atualizado em, name: atualizado, widget: string }
+          - label: Presidência
+            name: executivo
+            widget: list
+            fields: &pessoa
+              - { label: Nome completo, name: nome, widget: string }
+              - { label: Nome curto (como é conhecido), name: nome_curto, widget: string, required: false }
+              - { label: Cargo, name: cargo, widget: string }
+              - { label: Partido, name: partido, widget: string, required: false }
+              - { label: UF, name: uf, widget: string, required: false }
+              - { label: Nascimento (AAAA-MM-DD), name: nascimento, widget: string, required: false }
+              - { label: Naturalidade, name: naturalidade, widget: string, required: false }
+              - { label: Foto (link ou arquivo), name: foto, widget: string, required: false, hint: 'Deixe vazio para usar a foto da Wikipédia. Tamanho ideal 600 × 800 px (retrato).' }
+              - { label: Crédito da foto, name: credito_foto, widget: string, required: false }
+              - { label: Título do artigo na Wikipédia, name: wiki, widget: string, required: false, hint: 'Usado para foto e biografia automáticas. Ex.: Flávio Dino' }
+              - { label: Mandato, name: mandato, widget: string, required: false }
+              - { label: Eleição / votos, name: eleicao, widget: string, required: false }
+              - { label: Salário bruto (R$), name: salario, widget: number, value_type: float, required: false }
+              - { label: Link oficial, name: link, widget: string, required: false }
+          - { label: Presidentes da Câmara e do Senado, name: presidentes_casas, widget: list, fields: *pessoa }
+          - { label: Aviso sobre ministros, name: ministros_nota, widget: text, required: false }
+          - { label: Ministros, name: ministros, widget: list, fields: *pessoa }
+          - { label: Aviso sobre o STF, name: stf_nota, widget: text, required: false }
+          - label: Ministros do STF
+            name: stf
+            widget: list
+            fields:
+              - { label: Nome, name: nome, widget: string }
+              - { label: Cargo, name: cargo, widget: string, default: 'Ministro(a) do STF' }
+              - { label: Indicado(a) por, name: indicado_por, widget: string }
+              - { label: Desde (ano), name: desde, widget: string }
+              - { label: Título na Wikipédia, name: wiki, widget: string, required: false }
+              - { label: Foto (opcional), name: foto, widget: string, required: false }
+              - { label: Salário bruto (R$), name: salario, widget: number, value_type: float, required: false }
+              - { label: Mandato, name: mandato, widget: string, required: false }
+              - { label: Link oficial, name: link, widget: string, required: false }
+          - { label: Aviso sobre governadores, name: governadores_nota, widget: text, required: false }
+          - label: Governadores
+            name: governadores
+            widget: list
+            summary: '{{fields.uf}} — {{fields.em_exercicio}} / eleito: {{fields.eleito}}'
+            fields:
+              - { label: UF, name: uf, widget: string }
+              - { label: Em exercício hoje, name: em_exercicio, widget: string, required: false }
+              - { label: Partido de quem está em exercício, name: partido_exercicio, widget: string, required: false }
+              - { label: Eleito(a) em 2026, name: eleito, widget: string }
+              - { label: Partido do(a) eleito(a), name: partido_eleito, widget: string }
+              - { label: Turno, name: turno, widget: select, options: ['1º', '2º'] }
+              - { label: '% dos votos válidos', name: percentual, widget: number, value_type: float }
+              - { label: Situação (ex. reeleito), name: situacao, widget: string, required: false }
+              - { label: Salário bruto (R$), name: salario, widget: number, value_type: float, required: false, hint: 'Cada estado define por lei. Deixe 0 se não souber.' }
+              - { label: Wikipédia de quem está em exercício, name: wiki_exercicio, widget: string, required: false }
+              - { label: Wikipédia do(a) eleito(a), name: wiki_eleito, widget: string, required: false }
+
+  # ---------------------------------------------------------
+  - name: eleicoes
+    label: Eleições 2026
+    editor: { preview: false }
+    files:
+      - name: resultados
+        label: Resultados
+        file: content/eleicoes.json
+        fields:
+          - { label: Título, name: titulo, widget: string }
+          - { label: Atualizado em, name: atualizado, widget: string }
+          - label: Presidente
+            name: presidente
+            widget: object
+            fields:
+              - label: 1º turno
+                name: primeiro_turno
+                widget: object
+                fields:
+                  - { label: Data, name: data, widget: string }
+                  - { label: Fonte, name: fonte, widget: string }
+                  - { label: Link da fonte, name: fonte_url, widget: string }
+                  - { label: Comparecimento, name: comparecimento, widget: string }
+                  - { label: Brancos, name: brancos, widget: string }
+                  - { label: Nulos, name: nulos, widget: string }
+                  - label: Candidatos
+                    name: candidatos
+                    widget: list
+                    fields: &cand
+                      - { label: Nome, name: nome, widget: string }
+                      - { label: Partido, name: partido, widget: string }
+                      - { label: Votos, name: votos, widget: number, value_type: int }
+                      - { label: '%', name: percentual, widget: number, value_type: float }
+              - label: 2º turno
+                name: segundo_turno
+                widget: object
+                fields:
+                  - { label: Data, name: data, widget: string }
+                  - { label: Fonte, name: fonte, widget: string }
+                  - { label: Link da fonte, name: fonte_url, widget: string }
+                  - { label: Candidatos, name: candidatos, widget: list, fields: *cand }
+          - { label: Aviso do Senado, name: senado_nota, widget: text }
+          - label: Senadores eleitos
+            name: senadores_eleitos
+            widget: list
+            summary: '{{fields.uf}} — {{fields.nome}} ({{fields.partido}})'
+            fields:
+              - { label: UF, name: uf, widget: string }
+              - { label: Nome, name: nome, widget: string }
+              - { label: Partido, name: partido, widget: string }
+              - { label: Reeleito(a), name: reeleito, widget: boolean, default: false }
+              - { label: Título na Wikipédia (para a foto), name: wiki, widget: string, required: false }
+          - label: Calendário
+            name: calendario
+            widget: list
+            fields:
+              - { label: Data (AAAA-MM-DD), name: data, widget: string }
+              - { label: Evento, name: evento, widget: string }
+          - { label: Link do TSE, name: link_tse, widget: string }

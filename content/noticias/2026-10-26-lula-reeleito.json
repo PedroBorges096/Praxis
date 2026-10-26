@@ -1,0 +1,55 @@
+{
+  "titulo": "Lula é reeleito e terá quarto mandato a partir de janeiro",
+  "linha_fina": "No segundo turno de domingo (25), Lula venceu Flávio Bolsonaro por 51,79% a 48,21% dos votos válidos.",
+  "categoria": "Política Nacional",
+  "selo": "Reportagem",
+  "autora": "Sthephanye Silva",
+  "data": "2026-10-26T07:30:00-03:00",
+  "destaque_capa": false,
+  "imagem": "",
+  "posicao_foto": "top",
+  "legenda_foto": "",
+  "credito_foto": "",
+  "video": "",
+  "em_30_segundos": [
+    "Lula (PT) foi reeleito com 51,79% dos votos válidos.",
+    "Flávio Bolsonaro (PL) teve 48,21%.",
+    "A posse do novo mandato será em 5 de janeiro de 2027."
+  ],
+  "fatos": "- Resultado com **99,99%** das urnas apuradas: Lula **51,79%**, Flávio Bolsonaro **48,21%**.\n- Geraldo Alckmin (PSB) segue como vice.\n- Pela Emenda Constitucional 111/2021, a posse presidencial passa a ser em **5 de janeiro**.",
+  "analise": "[Análise: mapa da votação, o que o resultado diz sobre o país e a correlação de forças no novo Congresso.]",
+  "opiniao": "",
+  "o_que_muda": "[Quais promessas de campanha afetam o seu bolso e quando podem sair do papel.]",
+  "corpo": "[Texto completo da reportagem.]",
+  "galeria": [],
+  "linha_do_tempo": [
+    {
+      "quando": "04/10/2026",
+      "evento": "Primeiro turno"
+    },
+    {
+      "quando": "25/10/2026",
+      "evento": "Segundo turno: Lula reeleito"
+    },
+    {
+      "quando": "05/01/2027",
+      "evento": "Posse do novo mandato"
+    }
+  ],
+  "fontes": [
+    {
+      "nome": "InfoMoney — Eleições 2026: resultado do 2º turno",
+      "url": "https://www.infomoney.com.br/politica/ao-vivo-eleicoes-segundo-turno-2026/"
+    },
+    {
+      "nome": "TSE — Resultados",
+      "url": "https://resultados.tse.jus.br/"
+    }
+  ],
+  "tags": [
+    "Eleições 2026",
+    "Lula"
+  ],
+  "checado_em": "2026-10-26T00:00:00-03:00",
+  "correcao": ""
+}

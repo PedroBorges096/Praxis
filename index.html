@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRAXIS — Análise Política e Conjuntura com Sthephanye Silva</title>
+<meta name="description" content="PRAXIS: análise política e de conjuntura com Sthephanye Silva. Jornalismo independente, dados ao vivo e ferramentas para o leitor.">
+<meta property="og:title" content="PRAXIS — Análise Política e Conjuntura com Sthephanye Silva">
+<meta property="og:description" content="Análise política e de conjuntura com Sthephanye Silva.">
+<meta property="og:image" content="/img/og-padrao.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8B1E2D">
+<link rel="icon" href="img/icone.svg">
+<link rel="apple-touch-icon" href="img/icone-192.png">
+<link rel="alternate" type="application/rss+xml" title="PRAXIS" href="feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/noticia.css">
+<link rel="stylesheet" href="css/home.css">
+</head>
+<body data-pagina="inicio">
+<div id="topo"></div>
+
+<main class="container home">
+  <!-- ANÚNCIO: cole aqui o código do AdSense (728x90) -->
+  <div class="anuncio" style="height:90px">Espaço publicitário · 728×90</div>
+  <div id="aviso-dados"></div>
+
+  <div class="capa">
+    <div class="capa__principal">
+      <!-- A manchete é a notícia marcada como "Destacar na capa" no painel -->
+      <div id="manchete"><div class="carregando">Carregando as notícias…</div></div>
+      <section class="secao" aria-labelledby="foco">
+        <h2 class="secao__titulo" id="foco">Em Foco</h2>
+        <div class="grade" id="em-foco"></div>
+      </section>
+    </div>
+    <aside class="ultimas" aria-labelledby="ultimas">
+      <div class="ultimas__topo"><h2 id="ultimas" class="serif">Últimas Notícias</h2><span class="eyebrow" style="font-size:11px">● Ao vivo</span></div>
+      <ol id="lista-ultimas"></ol>
+      <!-- ANÚNCIO: AdSense 300x250 -->
+      <div class="anuncio" style="height:250px;margin-top:24px">Anúncio<br>300×250</div>
+    </aside>
+  </div>
+
+  <section class="mercados" aria-labelledby="mercados">
+    <div class="eyebrow" style="color:#E8A3AD">Mercados &amp; Ações · ao vivo</div>
+    <h2 id="mercados">Os principais índices do mundo</h2>
+    <div class="mercados__grade" id="mini-graficos"></div>
+    <p class="mercados__nota">Gráficos fornecidos pelo TradingView. Índices de bolsa podem ter atraso de até 15 minutos.</p>
+  </section>
+
+  <section class="podcast-chamada" id="podcast-chamada" hidden aria-labelledby="pod-titulo"></section>
+
+  <section aria-labelledby="ferr">
+    <div class="secao" style="margin-bottom:20px"><div class="eyebrow">Ferramentas</div><h2 class="secao__titulo" id="ferr" style="margin:6px 0 0">Jornalismo que você pode usar</h2></div>
+    <div class="grade">
+      <a class="cartao ferramenta" href="politicos"><strong>Quem Governa</strong><span>Todos os deputados, senadores e o Executivo: foto, idade, salário, gastos e projetos.</span><b class="ferramenta__cta">Ver todos →</b></a>
+      <a class="cartao ferramenta ferramenta--escura" href="calculadora"><strong>Salário vs. Inflação</strong><span>Quanto a inflação já comeu do seu salário desde o último reajuste.</span><b>Calcular agora →</b></a>
+      <a class="cartao ferramenta ferramenta--azul" href="podcast"><strong>Podcast PRAXIS</strong><span>Ouça ou assista: política e economia explicadas em conversa.</span><b class="ferramenta__cta--azul">Ouvir agora →</b></a>
+    </div>
+  </section>
+
+  <section class="explica" aria-labelledby="expl" id="bloco-explica" hidden>
+    <div class="eyebrow">Explicando</div>
+    <h2 class="secao__titulo" id="expl" style="margin:6px 0 18px">Economia sem economês</h2>
+    <div class="grade" id="explicadores" style="gap:14px"></div>
+  </section>
+
+  <section aria-labelledby="colunas" id="bloco-colunas" hidden>
+    <div class="secao"><h2 class="secao__titulo" id="colunas">Colunas &amp; Opinião</h2></div>
+    <div class="colunistas" id="colunistas"></div>
+  </section>
+
+  <section class="cartao quem-faz" id="quem-faz" aria-labelledby="quem-faz-titulo">
+    <img id="foto-dona" src="img/sthephany.png" alt="" width="160" height="160">
+    <div class="quem-faz__texto">
+      <div class="eyebrow">Quem faz a PRAXIS</div>
+      <h2 id="quem-faz-titulo" class="serif">Sthephanye Silva</h2>
+      <div class="quem-faz__cargo">Análise Política e Conjuntura</div>
+      <p id="bio-dona"></p>
+      <div class="quem-faz__redes" id="redes-dona"></div>
+    </div>
+  </section>
+
+  <div class="conversao" id="apoie">
+    <section class="cartao">
+      <div class="eyebrow">Newsletter diária</div>
+      <h2>O essencial da política e da economia, toda manhã no seu e-mail.</h2>
+      <form id="form-news" action="#" method="post" target="_blank" style="display:flex;flex-wrap:wrap;gap:10px">
+        <label for="email" class="sr-only">Seu e-mail</label>
+        <input id="email" name="email" type="email" required placeholder="seu@email.com" class="campo-news">
+        <button class="btn btn--escuro" type="submit" style="height:48px">Quero receber</button>
+      </form>
+      <p class="pequeno">Gratuita. Cancele quando quiser. Ao se inscrever, você concorda com a política de privacidade.</p>
+    </section>
+    <section class="apoio">
+      <div class="eyebrow" style="color:var(--bordo-claro)">Financiamento coletivo</div>
+      <h2>Jornalismo independente só existe com leitores que apoiam.</h2>
+      <p style="margin:0;color:#F6E4E6">Sem anunciantes que ditam a pauta. Contribua com qualquer valor, mensal ou único.</p>
+      <div id="pix" class="pix" hidden><span>Chave Pix</span><code id="pix-chave"></code><button type="button" class="btn btn--branco" id="pix-copiar">Copiar</button></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px"><button type="button" class="btn btn--branco abre-apoio" id="link-apoio">Quero apoiar via Pix</button></div>
+    </section>
+  </div>
+</main>
+
+<!-- Caixa de leitura rápida -->
+<dialog class="leitura" id="leitura" aria-label="Leitura rápida">
+  <button type="button" class="leitura__fechar" id="leitura-fechar" aria-label="Fechar">×</button>
+  <div id="leitura-conteudo"></div>
+</dialog>
+
+<div id="rodape"></div>
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/ticker.js"></script>
+<script src="js/render.js"></script>
+<script src="js/home.js"></script>
+<script>
+  /* Mini-gráficos ao vivo (TradingView). Para trocar um ativo, edite a lista. */
+  (function () {
+    var ativos = ['BMFBOVESPA:IBOV', 'FX_IDC:USDBRL', 'FOREXCOM:SPXUSD', 'TVC:UKOIL', 'TVC:GOLD'];
+    var alvo = document.getElementById('mini-graficos');
+    ativos.forEach(function (simbolo) {
+      var box = document.createElement('div');
+      box.className = 'tradingview-widget-container';
+      box.innerHTML = '<div class="tradingview-widget-container__widget"></div>';
+      var s = document.createElement('script');
+      s.src = 'https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js';
+      s.async = true;
+      s.text = JSON.stringify({ symbol: simbolo, width: '100%', height: 200, locale: 'br', dateRange: '1M', colorTheme: 'dark', isTransparent: true, autosize: false });
+      box.appendChild(s);
+      alvo.appendChild(box);
+    });
+  })();
+</script>
+</body>
+</html>

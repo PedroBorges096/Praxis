@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contato — PRAXIS</title>
+<meta name="description" content="Fale com a PRAXIS: sugestões de pauta, correções, denúncias e parcerias.">
+<link rel="canonical" href="https://praxis-analise.netlify.app/contato">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8B1E2D">
+<link rel="icon" href="img/icone.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/noticia.css">
+</head>
+<body data-pagina="contato">
+<div id="topo"></div>
+<main class="container">
+  <article class="nt nt--pagina">
+    <header class="nt-corpo nt-corpo--estreito">
+      <div class="nt-rotulo">PRAXIS</div>
+      <h1 class="nt-titulo">Contato</h1>
+      <p class="nt-linha-fina">Fale com a PRAXIS: sugestões de pauta, correções, denúncias e parcerias.</p>
+    </header>
+    <div class="nt-corpo nt-corpo--estreito" style="padding-top:0">
+      <section class="nt-texto"><p>Tem uma sugestão de pauta, encontrou um erro ou quer propor uma parceria? Escreva pelo formulário abaixo.</p>
+<p>Se preferir, fale direto pelo e-mail [E-MAIL DE CONTATO] ou pelas redes sociais.</p>
+</section>
+      
+    <div id="enviado" class="aviso" hidden style="margin-top:8px">✔ Mensagem enviada! Responderemos em breve.</div>
+    <form class="contato" name="contato" method="POST" action="/contato?enviado=1" data-netlify="true" netlify-honeypot="campo-robo">
+      <input type="hidden" name="form-name" value="contato">
+      <p hidden><label>Não preencha: <input name="campo-robo"></label></p>
+      <div class="campo"><label for="c-nome">Nome</label><input id="c-nome" name="nome" required autocomplete="name"></div>
+      <div class="campo"><label for="c-email">E-mail</label><input id="c-email" name="email" type="email" required autocomplete="email"></div>
+      <div class="campo"><label for="c-assunto">Assunto</label><select id="c-assunto" name="assunto"><option>Sugestão de pauta</option><option>Correção</option><option>Denúncia</option><option>Parceria</option><option>Outro</option></select></div>
+      <div class="campo campo--largo"><label for="c-msg">Mensagem</label><textarea id="c-msg" name="mensagem" rows="6" required></textarea></div>
+      <button class="btn btn--bordo" type="submit">Enviar mensagem</button>
+    </form>
+    <script>if (/enviado=1/.test(location.search)) document.getElementById('enviado').hidden = false;</script>
+    </div>
+  </article>
+</main>
+<div id="rodape"></div>
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/ticker.js"></script>
+</body>
+</html>

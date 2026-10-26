@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eleições 2026 — PRAXIS</title>
+<meta name="description" content="Eleições 2026: resultado para presidente, governadores e senadores eleitos, mapa por estado e calendário de posse.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8B1E2D">
+<link rel="icon" href="img/icone.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .el-hero { padding: 40px 0 8px; display: flex; flex-direction: column; gap: 10px; max-width: 860px; }
+  .el-hero h1 { margin: 0; font-family: var(--serif); font-size: clamp(36px, 5vw, 58px); line-height: 1.05; }
+  .el-hero p { margin: 0; font-size: 18px; color: var(--texto-forte); }
+  .el-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 8px; }
+  .el-nav a { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--linha); background: var(--branco); font-weight: 600; font-size: 14px; }
+  .el-secao { margin-top: 36px; scroll-margin-top: 70px; }
+  .el-secao > h2 { font-family: var(--serif); font-size: 30px; margin: 0 0 6px; }
+  .el-secao > p.sub { margin: 0 0 18px; color: var(--texto-suave); font-size: 14px; }
+  .placar { background: var(--branco); border: 1px solid var(--linha); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+  .placar__nomes { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .placar__cand { display: flex; flex-direction: column; gap: 2px; }
+  .placar__cand:last-child { text-align: right; }
+  .placar__pct { font-family: var(--serif); font-size: clamp(36px, 6vw, 56px); font-weight: 800; line-height: 1; }
+  .placar__barra { display: flex; height: 22px; border-radius: 999px; overflow: hidden; background: var(--linha); }
+  .placar__meio { position: relative; }
+  .placar__meio::after { content: "50%"; position: absolute; left: 50%; top: -18px; transform: translateX(-50%); font-size: 11px; color: var(--texto-suave); }
+  .tabela-wrap { overflow-x: auto; border: 1px solid var(--linha); border-radius: 16px; background: var(--branco); }
+  table.el { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px; }
+  table.el th { text-align: left; padding: 12px 16px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--texto-suave); border-bottom: 1px solid var(--linha); }
+  table.el td { padding: 12px 16px; border-bottom: 1px solid var(--linha); vertical-align: middle; }
+  table.el tr:last-child td { border-bottom: 0; }
+  .mini-barra { height: 8px; border-radius: 999px; background: var(--linha); overflow: hidden; min-width: 120px; }
+  .mini-barra span { display: block; height: 8px; border-radius: 999px; }
+  .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .gov { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+  .gov__mapa { display: grid; grid-template-columns: repeat(8, 50px); grid-template-rows: repeat(9, 50px); gap: 5px; flex: 0 0 auto; }
+  @media (max-width: 480px) { .gov__mapa { grid-template-columns: repeat(8, 36px); grid-template-rows: repeat(9, 36px); gap: 4px; } }
+  .gov__uf { border: 0; border-radius: 10px; color: #fff; font-weight: 700; font-size: 12px; cursor: pointer; transition: transform .12s; }
+  .gov__uf:hover, .gov__uf[aria-pressed="true"] { transform: scale(1.1); box-shadow: 0 0 0 3px var(--fundo), 0 0 0 5px var(--texto); }
+  .gov__lado { flex: 1 1 320px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .legenda { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; }
+  .legenda button { border: 0; background: none; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; padding: 4px 0; color: var(--texto); font-weight: 600; }
+  .legenda i { width: 12px; height: 12px; border-radius: 12px; display: inline-block; }
+  .cartao-pessoa { display: flex; gap: 16px; align-items: center; background: var(--branco); border: 1px solid var(--linha); border-radius: 16px; padding: 16px; }
+  .cartao-pessoa .ft { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; object-position: top; background: #2A3444; color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-weight: 700; font-size: 26px; flex: 0 0 auto; }
+  .cartao-pessoa h3 { margin: 0 0 2px; font-family: var(--serif); font-size: 21px; }
+  .cartao-pessoa p { margin: 0; font-size: 14px; color: var(--texto-suave); }
+  .sen-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .sen-uf { background: var(--branco); border: 1px solid var(--linha); border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+  .sen-uf h3 { margin: 0; font-size: 13px; letter-spacing: .1em; color: var(--bordo); }
+  .sen { display: flex; gap: 12px; align-items: center; }
+  .sen .ft { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: top; background: #2A3444; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex: 0 0 auto; }
+  .sen strong { display: block; font-size: 15px; }
+  .sen small { color: var(--texto-suave); }
+  .tag-ree { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--areia); padding: 2px 6px; border-radius: 6px; margin-left: 6px; }
+  .cal { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .cal li { background: var(--branco); border: 1px solid var(--linha); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .cal b { font-family: var(--serif); font-size: 26px; color: var(--bordo); }
+  .fonte { font-size: 12px; color: var(--texto-suave); margin-top: 10px; }
+  .fonte a { text-decoration: underline; }
+</style>
+</head>
+<body data-pagina="eleicoes">
+<div id="topo"></div>
+<main class="container">
+  <section class="el-hero">
+    <div class="eyebrow">Especial</div>
+    <h1>Eleições 2026</h1>
+    <p>O resultado para presidente, os 27 governadores e os 54 senadores eleitos, e o calendário de posse.</p>
+    <nav class="el-nav" aria-label="Seções">
+      <a href="#presidente">Presidente</a><a href="#governadores">Governadores</a><a href="#senado">Senado</a><a href="#calendario">Calendário</a>
+    </nav>
+  </section>
+  <div id="status"><div class="carregando">Carregando resultados…</div></div>
+
+  <section class="el-secao" id="presidente" aria-labelledby="t-pres">
+    <h2 id="t-pres">Presidente</h2>
+    <p class="sub" id="pres-sub"></p>
+    <div id="pres-2t"></div>
+    <h3 class="serif" style="font-size:22px;margin:28px 0 12px">1º turno</h3>
+    <div class="tabela-wrap"><table class="el" id="pres-1t"></table></div>
+    <p class="fonte" id="pres-fonte"></p>
+  </section>
+
+  <section class="el-secao" id="governadores" aria-labelledby="t-gov">
+    <h2 id="t-gov">Governadores eleitos</h2>
+    <p class="sub">Cor = partido do(a) eleito(a). Clique num estado para ver quem venceu. Posse em 6 de janeiro de 2027.</p>
+    <div class="gov">
+      <div class="gov__mapa" id="gov-mapa" role="group" aria-label="Governadores eleitos por estado"></div>
+      <div class="gov__lado">
+        <div class="legenda" id="gov-legenda"></div>
+        <div id="gov-detalhe"></div>
+      </div>
+    </div>
+    <div class="tabela-wrap" style="margin-top:20px"><table class="el" id="gov-tabela"></table></div>
+    <p class="fonte" id="gov-fonte"></p>
+  </section>
+
+  <section class="el-secao" id="senado" aria-labelledby="t-sen">
+    <h2 id="t-sen">Senado: os 54 eleitos</h2>
+    <p class="sub" id="sen-sub"></p>
+    <div class="legenda" id="sen-legenda" style="margin-bottom:14px"></div>
+    <div class="sen-grade" id="sen-grade"></div>
+  </section>
+
+  <section class="el-secao" id="calendario" aria-labelledby="t-cal">
+    <h2 id="t-cal">Calendário de posse</h2>
+    <ul class="cal" id="cal"></ul>
+    <p class="fonte">Resultado oficial completo, por cidade e zona: <a id="link-tse" href="https://resultados.tse.jus.br/" target="_blank" rel="noopener">TSE · Resultados</a>.</p>
+  </section>
+</main>
+<div id="rodape"></div>
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/ticker.js"></script>
+<script src="js/eleicoes.js"></script>
+</body>
+</html>

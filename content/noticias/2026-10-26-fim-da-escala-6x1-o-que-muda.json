@@ -1,0 +1,68 @@
+{
+  "titulo": "Fim da 6x1: o que muda na sua jornada e quando começa a valer",
+  "linha_fina": "A emenda promulgada em 16 de outubro reduz a jornada máxima para 40 horas semanais, com transição em duas etapas. Entenda o calendário e quem é afetado.",
+  "categoria": "Economia & Trabalho",
+  "selo": "Reportagem",
+  "autora": "Sthephanye Silva",
+  "data": "2026-10-26T09:00:00-03:00",
+  "destaque_capa": true,
+  "imagem": "",
+  "posicao_foto": "center",
+  "legenda_foto": "",
+  "credito_foto": "",
+  "video": "",
+  "em_30_segundos": [
+    "A escala 6x1 acabou: a Constituição agora garante dois dias de descanso remunerado por semana.",
+    "A jornada máxima cai de 44 para 42 horas em 60 dias e para 40 horas um ano depois.",
+    "Não pode haver corte de salário."
+  ],
+  "fatos": "- O Congresso promulgou a **Emenda Constitucional 141** em **16/10/2026**.\n- A PEC 221/2019 passou na Câmara em 27/05/2026: **472 a 22** no 1º turno e **461 a 19** no 2º.\n- O Senado aprovou o mesmo texto em 14/10/2026, por **75 a 1** nos dois turnos.\n- Transição: **42 horas** semanais 60 dias após a promulgação e **40 horas** 12 meses depois.",
+  "analise": "[Análise da Sthephanye: o que a mudança significa para o mercado de trabalho, setores mais afetados e o que dizem os estudos sobre produtividade.]",
+  "opiniao": "",
+  "o_que_muda": "Se você trabalha seis dias e folga um, sua empresa terá de adotar no máximo a escala **5x2**, sem reduzir o seu salário. Fique de olho no calendário: a primeira etapa vale 60 dias após 16/10/2026.",
+  "corpo": "[Texto completo da reportagem. Use os fatos acima como base, entreviste trabalhadores, sindicatos e empresários e explique o calendário com exemplos.]",
+  "galeria": [],
+  "linha_do_tempo": [
+    {
+      "quando": "27/05/2026",
+      "evento": "Câmara aprova a PEC 221/2019 em dois turnos"
+    },
+    {
+      "quando": "14/10/2026",
+      "evento": "Senado aprova o texto por 75 a 1"
+    },
+    {
+      "quando": "16/10/2026",
+      "evento": "Congresso promulga a Emenda Constitucional 141"
+    },
+    {
+      "quando": "60 dias depois",
+      "evento": "Escala 5x2 obrigatória e jornada máxima de 42 horas"
+    },
+    {
+      "quando": "12 meses depois",
+      "evento": "Jornada máxima de 40 horas"
+    }
+  ],
+  "fontes": [
+    {
+      "nome": "Agência Câmara — Congresso promulga emenda que acaba com a escala 6x1",
+      "url": "https://www.camara.leg.br/noticias/1311797-congresso-promulga-emenda-que-acaba-com-escala-6x1-e-estabelece-jornada-maxima-de-40-horas-semanais"
+    },
+    {
+      "nome": "Agência Brasil — Senado aprova fim da escala 6x1",
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-10/senado-aprova-fim-da-escala-6x1-e-reducao-da-jornada-de-trabalho"
+    },
+    {
+      "nome": "Agência Brasil — Como votaram os deputados",
+      "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-05/saiba-como-votaram-os-deputados-na-pec-que-acaba-com-escala-6x1"
+    }
+  ],
+  "tags": [
+    "6x1",
+    "Trabalho",
+    "Jornada"
+  ],
+  "checado_em": "2026-10-26T00:00:00-03:00",
+  "correcao": ""
+}

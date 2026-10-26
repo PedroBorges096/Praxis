@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Busca — PRAXIS</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8B1E2D">
+<link rel="icon" href="img/icone.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .busca-topo { padding: 40px 0 20px; display: flex; flex-direction: column; gap: 14px; }
+  .busca-topo h1 { margin: 0; font-family: var(--serif); font-size: clamp(32px, 4.5vw, 48px); }
+  .busca-campo { display: flex; gap: 10px; flex-wrap: wrap; }
+  .busca-campo input { flex: 1 1 280px; height: 52px; padding: 0 16px; font-size: 18px; border: 1px solid #B8B2A6; border-radius: 12px; background: var(--campo); color: var(--texto); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid #C9C3B8; background: transparent; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--texto); }
+  .chip[aria-pressed="true"] { background: var(--bordo); color: #fff; border-color: var(--bordo); }
+  .resultados { display: flex; flex-direction: column; margin-top: 10px; }
+  .res { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--linha); }
+  .res img, .res__vazia { width: 160px; aspect-ratio: 3/2; object-fit: cover; flex: 0 0 auto; background: #DCD6CB; }
+  .res__vazia { background: linear-gradient(135deg, var(--bordo), #5E1520); }
+  @media (max-width: 560px) { .res img, .res__vazia { width: 96px; } }
+  .res h2 { margin: 6px 0; font-family: var(--serif); font-size: 21px; line-height: 1.25; }
+  .res p { margin: 0; font-size: 14px; color: var(--texto-suave); }
+  .res mark { background: #F1E3C8; color: inherit; }
+  .tags-nuvem { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags-nuvem a { font-size: 13px; font-weight: 600; padding: 6px 12px; border: 1px solid var(--linha); border-radius: 16px; }
+</style>
+</head>
+<body data-pagina="busca">
+<div id="topo"></div>
+<main class="container">
+  <section class="busca-topo">
+    <div class="eyebrow" id="busca-eyebrow">Busca</div>
+    <h1 id="busca-titulo">Encontre uma notícia</h1>
+    <form class="busca-campo" id="form-busca" role="search" onsubmit="return false">
+      <label for="q" class="sr-only">Buscar</label>
+      <input id="q" type="search" placeholder="Ex.: 6x1, imposto de renda, Senado" autocomplete="off">
+    </form>
+    <div class="chips" id="chips-cat" role="group" aria-label="Editoria"></div>
+    <div class="chips" id="chips-selo" role="group" aria-label="Tipo de texto"></div>
+  </section>
+  <p id="contagem" class="leve" aria-live="polite" style="color:var(--texto-suave)"></p>
+  <div class="resultados" id="resultados"></div>
+  <section style="margin-top:32px">
+    <h2 class="serif" style="font-size:22px">Temas em destaque</h2>
+    <div class="tags-nuvem" id="nuvem"></div>
+  </section>
+</main>
+<div id="rodape"></div>
+<script src="js/config.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/ticker.js"></script>
+<script src="js/render.js"></script>
+<script src="js/busca.js"></script>
+</body>
+</html>

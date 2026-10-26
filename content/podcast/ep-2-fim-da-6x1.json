@@ -1,0 +1,29 @@
+{
+  "titulo": "Fim da 6x1: vitória de quem?",
+  "numero": 2,
+  "data": "2026-10-27T08:00:00-03:00",
+  "descricao": "[Descrição: debate sobre a Emenda 141 com convidada(o).]",
+  "capa": "",
+  "spotify": "",
+  "youtube": "",
+  "audio_arquivo": "",
+  "duracao": "[duração]",
+  "convidados": [
+    "[Nome do convidado]"
+  ],
+  "capitulos": [
+    {
+      "tempo": "00:00",
+      "titulo": "Abertura"
+    },
+    {
+      "tempo": "03:00",
+      "titulo": "O que diz a emenda"
+    },
+    {
+      "tempo": "18:00",
+      "titulo": "Impacto para quem trabalha"
+    }
+  ],
+  "transcricao": ""
+}

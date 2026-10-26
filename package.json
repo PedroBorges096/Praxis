@@ -1,0 +1,16 @@
+{
+  "name": "praxis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PRAXIS — Análise Política e Conjuntura com Sthephanye Silva",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "dev": "node scripts/build.js && node scripts/servidor.js"
+  },
+  "dependencies": {
+    "marked": "^12.0.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

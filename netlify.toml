@@ -1,0 +1,49 @@
+# Configuração do Netlify — não precisa mexer.
+[build]
+  command = "npm run build"
+  publish = "."
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Cache curto nos dados (notícias novas aparecem rápido) e longo nas imagens
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=60"
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+# Bloqueia o acesso direto aos arquivos-fonte e scripts internos
+[[redirects]]
+  from = "/content/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Endereços limpos, sem ".html" (ex.: /politicos, /eleicoes, /noticia/minha-materia).
+# Só valem quando não existe um arquivo com o nome exato.
+[[redirects]]
+  from = "/noticia/:slug"
+  to = "/noticia/:slug.html"
+  status = 200
+
+[[redirects]]
+  from = "/:pagina"
+  to = "/:pagina.html"
+  status = 200
