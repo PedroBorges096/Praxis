@@ -15,8 +15,8 @@ backend:
 
 locale: pt
 publish_mode: editorial_workflow   # Rascunho → Em revisão → Pronto para publicar
-site_url: https://praxis-analise.netlify.app
-display_url: https://praxis-analise.netlify.app
+site_url: https://praxisjornal.netlify.app
+display_url: https://praxisjornal.netlify.app
 logo_url: /img/icone.svg
 
 media_folder: img/uploads
